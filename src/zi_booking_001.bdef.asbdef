@@ -1,0 +1,31 @@
+managed implementation in class zbp_i_booking_001 unique;
+strict ( 2 );
+
+define behavior for ZI_BOOKING_001 alias Booking
+persistent table zbooking_001
+lock master
+authorization master ( none )
+{
+//  " Campos que no se pueden editar manualmente:
+  field ( readonly, numbering : managed ) BookingUuid;
+  field ( readonly ) CreatedAt;
+  field ( mandatory ) BookingStatus;
+
+//  " Operaciones CRUD estándar
+  create;
+  update;
+  delete;
+
+  action setConfirmed result [1] $self;
+
+//  " Mapeo entre los nombres de la CDS (derecha/CamelCase) y la tabla transparente (izquierda/snake_case)
+  mapping for zbooking_001
+  {
+    BookingUuid   = booking_uuid;
+    CustomerId    = customer_id;
+    AirlineId     = airline_id;
+    FlightDate    = flight_date;
+    BookingStatus = booking_status;
+    CreatedAt     = created_at;
+  }
+}

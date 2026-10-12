@@ -1,0 +1,42 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName: 'Reserva de Vuelo',
+    typeNamePlural: 'Reservas de Vuelo',
+    title: { type: #STANDARD, value: 'BookingUuid' }
+  }
+}
+annotate view ZC_BOOKING_001 with
+{
+  @UI.facet: [ { id:            'BookingHeader',
+                 purpose:       #STANDARD,
+                 type:          #IDENTIFICATION_REFERENCE,
+                 label:         'Detalle de la Reserva',
+                 position:      10 } ]
+
+  @UI.hidden: true
+  BookingUuid;
+
+  @UI: { lineItem:       [ { position: 10, label: 'ID Cliente' } ],
+         identification: [ { position: 10, label: 'ID Cliente' } ],
+         selectionField: [ { position: 10 } ] }
+  CustomerId;
+
+  @UI: { lineItem:       [ { position: 20, label: 'Aerolínea' } ],
+         identification: [ { position: 20, label: 'Aerolínea' } ] }
+  AirlineId;
+
+  @UI: { lineItem:       [ { position: 30, label: 'Fecha de Vuelo' } ],
+         identification: [ { position: 30, label: 'Fecha de Vuelo' } ] }
+  FlightDate;
+
+  @UI: { lineItem:       [ { position: 40, label: 'Estado' },
+                           { type: #FOR_ACTION, dataAction: 'setConfirmed', label: 'Confirmar Reserva' } ],
+         identification: [ { position: 40, label: 'Estado' },
+                           { type: #FOR_ACTION, dataAction: 'setConfirmed', label: 'Confirmar Reserva' } ] }
+  BookingStatus;
+
+  @UI: { lineItem:       [ { position: 50, label: 'Fecha Creación' } ],
+         identification: [ { position: 50, label: 'Fecha Creación' } ] }
+  CreatedAt;
+}

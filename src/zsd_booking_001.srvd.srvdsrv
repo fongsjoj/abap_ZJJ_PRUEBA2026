@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service Definition/expone CDS proyeccion'
+define service ZSD_BOOKING_001 {
+  expose ZC_BOOKING_001 as Booking;
+}
